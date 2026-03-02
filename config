@@ -1,0 +1,10 @@
+initialQueueMultiplier=100
+minProcessTime=1
+maxProcessTime=10
+restCycles= 100
+lowThresholdPerServer=50
+highThresholdPerServer=80
+newRequestChance=0.50
+blockedIP=1.
+blockedIP=10.
+blockedIP=100.

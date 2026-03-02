@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jackson Ward - Project 3 Design</title>
+  <link rel="stylesheet" href="design.css">
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="brand">Jackson Ward | CSCE 412 | Texas A&amp;M University</p>
+      <h1>Load Balancer Project Design</h1>
+    </header>
+
+    <section>
+      <h2>Flow Diagram</h2>
+      <div class="diagram">
+        <div class="box">Request Handler</div>
+        <div class="arrow">-></div>
+        <div class="box">Load Balancer</div>
+        <div class="arrow">-></div>
+        <div class="box">Web Servers</div>
+      </div>
+      <div class="diagram second">
+        <div class="box small">Firewall Check</div>
+        <div class="arrow">-></div>
+        <div class="box small">Queue of Requests</div>
+        <div class="arrow">-></div>
+        <div class="box small">Dynamic Scaling</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Text Description</h2>
+      <p>
+        The request handler creates requests with input IP, output IP, task time, and job type.
+        Each request is sent to the load balancer. The load balancer first checks the firewall,
+        then places allowed requests into a queue. Idle web servers pull the next request from the
+        queue, process it for the required number of clock cycles, and then ask for another task.
+      </p>
+      <p>
+        The load balancer keeps track of time and adjusts the number of servers to avoid overload
+        or underuse. If the queue falls below 50 times the number of servers, one server is removed.
+        If the queue grows above 80 times the number of servers, one server is added. After each
+        scaling change, the program waits the configured number of rest cycles before checking again.
+      </p>
+    </section>
+
+    <section>
+      <h2>Classes and Data</h2>
+      <ul>
+        <li><strong>Request</strong>: struct holding IP in, IP out, time, job type, and task number.</li>
+        <li><strong>Firewall</strong>: blocks configured IP ranges.</li>
+        <li><strong>WebServer</strong>: processes one request at a time.</li>
+        <li><strong>Server</strong>: container for all web servers.</li>
+        <li><strong>LoadBalancer</strong>: manages queue, time, scaling, and logging.</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
